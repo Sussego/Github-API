@@ -3,13 +3,6 @@ import React from "react";
 
 import { ThemeProvider } from "styled-components";
 
-const round = (num) =>
-  num
-    .toFixed(7)
-    .replace(/(\.[0-9]+?)0+$/, "$1")
-    .replace(/\.0$/, "");
-const rem = (px) => `${round(px / 16)}rem`;
-
 export const theme = {
   colors: {
     white: "#FFFFFF",
@@ -54,23 +47,15 @@ export const theme = {
   },
 
 
-  fontFamily: {
-    heading: ["IBM Plex Sans", "sans-serif"].join(","),
-    sans: ["Open Sans", "Arial", "Helvetica", "sans-serif"].join(","),
-    mono: ["IBM Plex Mono", "serif"].join(","),
-  },
+  fonts:['Open Sans', 'Arial', 'Helvetica', 'sans-serif'].join(','),
   fontSize: {
-    xs: rem(8),
-    sm: rem(10),
-    md: rem(16),
-    base: rem(24),
-    lg: rem(32),
-    xl: rem(40),
-    "2xl": rem(24),
-    "3xl": rem(32),
-    "4xl": rem(40),
-    "5xl": rem(64),
+    small: '.8rem',
+    normal: '1rem',
+    large: '1.2rem',
+    title: '1.3rem',
+    subtitle: '1.25rem',
   },
+
   breakpoints: {
     xs:'0',
     sm:'576px',
@@ -79,6 +64,9 @@ export const theme = {
     xl:'1200px',
     xxl:'1440px',
   },
+
+
+
 };
 
 export function Theme({ children }) {
