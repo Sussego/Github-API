@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import Profile from './Profile';
 import Filter from './Filter';
 import Repositories from './Repositories';
@@ -7,6 +7,8 @@ import {Container, Sidebar, Main} from "./styles";
 import { getLangsFrom } from '../../services/api';
 
 export default function RepositoriesPage() {
+    const[currentLanguage, setCurrentLanguage] = useState();
+
     const user = {
         login: 'Sussego',
         name: 'Eduardo Petenasi',
@@ -20,7 +22,7 @@ export default function RepositoriesPage() {
 
     const repositories = [
         { 
-            id:'1',
+            id:1,
             name: 'Repo 1',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -28,7 +30,7 @@ export default function RepositoriesPage() {
         },
 
         {
-            id:'2',
+            id:2,
             name: 'Repo 2',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -36,7 +38,7 @@ export default function RepositoriesPage() {
         },
 
         {
-            id:'3',
+            id:3,
             name: 'Repo 3',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -44,7 +46,7 @@ export default function RepositoriesPage() {
         },
 
         {
-            id:'4',
+            id:4,
             name: 'Repo 4',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -52,7 +54,7 @@ export default function RepositoriesPage() {
         },
 
         {
-            id:'5',
+            id:5,
             name: 'Repo 5',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -60,7 +62,7 @@ export default function RepositoriesPage() {
         },
 
         {
-            id:'6',
+            id:6,
             name: 'Repo 6',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -70,11 +72,19 @@ export default function RepositoriesPage() {
 
     const languages = getLangsFrom(repositories);
 
+    const onFilterClick = (language) => {
+        setCurrentLanguage(language);
+    }
+
     return(
         <Container>
             <Sidebar>
                 <Profile user={user}/>
-                <Filter languages={languages}/>
+                <Filter
+                    languages={languages}
+                    currentLanguage={currentLanguage}
+                    onClick={onFilterClick}
+                />
             </Sidebar>
             <Main>
                 <Repositories repositories={repositories}/>
