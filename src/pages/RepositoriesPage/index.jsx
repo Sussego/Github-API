@@ -20,6 +20,7 @@ export default function RepositoriesPage() {
 
     const repositories = [
         { 
+            id:'1',
             name: 'Repo 1',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -27,6 +28,7 @@ export default function RepositoriesPage() {
         },
 
         {
+            id:'2',
             name: 'Repo 2',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -34,6 +36,7 @@ export default function RepositoriesPage() {
         },
 
         {
+            id:'3',
             name: 'Repo 3',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -41,6 +44,7 @@ export default function RepositoriesPage() {
         },
 
         {
+            id:'4',
             name: 'Repo 4',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -48,6 +52,7 @@ export default function RepositoriesPage() {
         },
 
         {
+            id:'5',
             name: 'Repo 5',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -55,6 +60,7 @@ export default function RepositoriesPage() {
         },
 
         {
+            id:'6',
             name: 'Repo 6',
             description: 'Description',
             html_url: 'https://github.com/Sussego/Github-API',
@@ -71,7 +77,7 @@ export default function RepositoriesPage() {
                 <Filter languages={languages}/>
             </Sidebar>
             <Main>
-                <Repositories/>
+                <Repositories repositories={repositories}/>
             </Main>
         </Container>
     );
