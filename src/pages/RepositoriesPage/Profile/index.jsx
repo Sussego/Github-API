@@ -1,36 +1,54 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { MdGroup, MdLocationCity, MdWork, MdLink } from "react-icons/md";
 
 import {Container, Header, Avatar, Login, Name, Inner, Data } from './styles'
 
-function Profile (){
+function Profile ({ user }){
     return(
         <Container>
             <Header>
-                <Avatar src="https://avatars.githubusercontent.com/u/51163873?v=4"/>
-                <Login>Nickname</Login>
-                <Name>User Name</Name>
+                <Avatar src={user.avatar_url}/>
+                <Login>{user.login}</Login>
+                <Name>{user.name}</Name>
             </Header>
             <Inner>
                 <Data>
                     <MdGroup size={20}/>
-                    10&nbsp;<i>followers</i>&nbsp;&middot;&nbsp;14&nbsp;<i>Following</i>
+                    {user.followers}&nbsp;<i>followers</i>&nbsp;&middot;&nbsp;{user.following}&nbsp;<i>Following</i>
                 </Data>
-                <Data>
+
+                {user.company && (<Data>
                     <MdWork size={20}/>
-                    Interprise
-                    </Data>
-                <Data>
+                    {user.company}
+                    </Data>)}
+
+                {user.location &&(<Data>
                     <MdLocationCity size={20}/>
-                    City
-                </Data>
-                <Data>
+                    {user.location}
+                </Data>)}
+
+                {user.blog &&(<Data>
                     <MdLink size={20}/>
-                    <a href ="https://github.com/Sussego">External Link</a>
-                </Data>
+                    <a href ={`\\${user.blog}`}>{user.blog}</a>
+                </Data>)}
             </Inner>
         </Container>
     );
 }
+
+Profile.propTypes = {
+    user: PropTypes.shape({
+        login: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        avatar_url: PropTypes.string.isRequired,
+        followers: PropTypes.number.isRequired,
+        following: PropTypes.number.isRequired,
+        company: PropTypes.string,
+        blog: PropTypes.string,
+        location: PropTypes.string,
+    }).isRequired,
+};
 
 export default Profile;
