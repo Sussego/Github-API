@@ -5,7 +5,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background: rgba(0,0,0,0.25);
-    border-left: 3px solid ${(props)=> props.color || props.theme.colors.campagneDark};
+    border-left: 3px solid ${(props)=> props.color || props.theme.colors.champagneDark};
     padding: 1rem;
 `;
 
@@ -24,7 +24,7 @@ export const Footer = styled.footer`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: ${(props) => props.color || props.theme.color.champagneDark};
+    color: ${(props) => props.color || props.theme.colors.champagneDark};
     font-size: ${(props) => props.theme.fontSize.small};
 `;
 
