@@ -1,79 +1,38 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import Profile from './Profile';
 import Filter from './Filter';
 import Repositories from './Repositories';
 
-import {Container, Sidebar, Main} from "./styles";
-import { getLangsFrom } from '../../services/api';
+import {Container, Sidebar, Main, Loading} from "./styles";
+import { getLangsFrom, getUser, getRepos } from '../../services/api';
 
 export default function RepositoriesPage() {
+    const [user, setUser] = useState();
+    const [repositories, setRepositories] = useState();
+    const[languages, setLanguages] = useState();
     const[currentLanguage, setCurrentLanguage] = useState();
+    const[loading, setLoading] = useState(true);
 
-    const user = {
-        login: 'Sussego',
-        name: 'Eduardo Petenasi',
-        avatar_url: "https://avatars.githubusercontent.com/u/51163873?v=4",
-        followers: 10,
-        following: 14,
-        company: null,
-        blog: "https://github.com/Sussego/Github-API",
-        location: 'Bandeirantes',
-    };
+    useEffect(() => {
+        const loadData = async () => {
+            const[userResponse, repositoriesResponse] = await Promise.all([getUser('Sussego'), getRepos('Sussego')]);
+            setUser(userResponse.data);
+            setRepositories(repositoriesResponse.data);
 
-    const repositories = [
-        { 
-            id:1,
-            name: 'Repo 1',
-            description: 'Description',
-            html_url: 'https://github.com/Sussego/Github-API',
-            language: 'Javascript'
-        },
+            setLanguages(getLangsFrom(repositoriesResponse.data));
 
-        {
-            id:2,
-            name: 'Repo 2',
-            description: 'Description',
-            html_url: 'https://github.com/Sussego/Github-API',
-            language: 'Javascript'
-        },
+            setLoading(false);
+        };
 
-        {
-            id:3,
-            name: 'Repo 3',
-            description: 'Description',
-            html_url: 'https://github.com/Sussego/Github-API',
-            language: 'PHP'
-        },
-
-        {
-            id:4,
-            name: 'Repo 4',
-            description: 'Description',
-            html_url: 'https://github.com/Sussego/Github-API',
-            language: 'Ruby'
-        },
-
-        {
-            id:5,
-            name: 'Repo 5',
-            description: 'Description',
-            html_url: 'https://github.com/Sussego/Github-API',
-            language: 'Java'
-        },
-
-        {
-            id:6,
-            name: 'Repo 6',
-            description: 'Description',
-            html_url: 'https://github.com/Sussego/Github-API',
-            language: 'TypeScript'
-        },
-    ];
-
-    const languages = getLangsFrom(repositories);
+        loadData();
+    }, []);
 
     const onFilterClick = (language) => {
         setCurrentLanguage(language);
+    }
+
+    if(loading){
+        return <Loading>Carregando...</Loading>;
     }
 
     return(
