@@ -1,4 +1,4 @@
-# GitHub Repository Explorer
+# GitHub API
 
 A simple React application to explore GitHub repositories and display relevant information.
 
